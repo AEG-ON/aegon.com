@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root{
     --bg-grandiente: linear-gradient(#161717ea, #0B2138, #002B58);
     --primary-color:#0347B0;
@@ -43,9 +47,11 @@ header{
     width: 550px;
     list-style: none;
     display: flex;
-    align-content: center;
     justify-content: space-between;
     color: var(--white);
+    font: 35px 600 bold;
+    font-family: "Rokkitt", serif;
+    text-transform: uppercase;
 }
 
 .menu-paraleo-header > i{
