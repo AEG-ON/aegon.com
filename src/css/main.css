@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rokkitt:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-    --bg-grandiente: linear-gradient(#161717ea, #0B2138, #002B58);
+    --bg-grandiente: linear-gradient(#161717, #0B2138, #002B58);
     --primary-color:#0347B0;
     --white:#FAFAFA;
     --black:#161717;
@@ -15,21 +15,27 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Rokkitt", serif;
 }
 
 body{
     background: var(--bg-grandiente) no-repeat;
+    min-height: 100%;
 }
+
 header{
-    padding: 1.5rem;
+    margin: auto;
+    max-width: 1400px;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 10;
+    position: relative;
 }
 .image-header{
-    width: 220px !important;
-    margin: .5rem 10rem .5rem .5rem;
+    width: 320px !important;
+    margin: .5rem 5rem .5rem .5rem;
 }
 
 .image-header > img{
@@ -44,22 +50,170 @@ header{
 }
 
 .sessoes-menu > ul{
-    width: 550px;
+    width: 800px;
     list-style: none;
     display: flex;
     justify-content: space-between;
     color: var(--white);
-    font: 35px 600 bold;
+    font-size: 20px;
     font-family: "Rokkitt", serif;
     text-transform: uppercase;
+    padding: 0 2.5rem;
 }
 
 .menu-paraleo-header > i{
     color: var(--white);
     font-size: 20px;
 }
+main{
+    margin: auto;
+    
+    z-index: 10;
+    position: relative;
+}
+
+.impacto{
+    display: flex;
+    height: 680px;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10rem;
+}
+
+.texto-alto-impacto{
+    margin: auto;
+}
+
+.texto-alto-impacto > h1{
+    color: var(--white);
+    font-size: 60px;
+    
+}
+
+.texto-alto-impacto > p{
+    color: var(--text-color);
+    letter-spacing: 1.2px;
+}
+
+
 .ultimoTexto{
     color: var(--text-color);
     text-align: center;
     background-color: linar-grdiente;
+}
+.video-impacto{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    ;
+}
+.video-impacto > video{
+    width: 100%;
+    max-height: 1200px;
+    object-fit: cover;
+    display: block;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  height: 500px;        /* altura fixa do container */
+}
+
+.video-container video {
+  width: 100%;
+  min-height: 100%;      /* garante que cobre verticalmente */
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.2s ease-out;
+  object-fit: cover;
+}
+.servicosPrestados{
+    height: 350px;
+}
+
+.servicosPrestados{
+    color: var(--white);
+    text-align: center;
+    font-size: 30px;
+}
+.servicosPrestados > div{
+    margin-bottom: 5rem;
+}
+
+.quadro-logos-parceiras{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.marcas-parceiras-servicosPrestados{
+    border-radius: 130px;
+    width: 130px;
+    height: 130px;
+}
+
+.marcas-parceiras-servicosPrestados > img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.impacto-p2{
+    margin: auto;
+    background-color: #060606;
+}
+
+.conteudo-p2{
+    max-width: 1350px;
+    height: 850px;
+    margin: auto;
+}
+
+
+.titulo{
+    padding-top: 5rem;
+    text-align: center;
+    font-size: 50px;
+}
+.impacto-p2 > img{
+    width: 100%;
+}
+.impacto-p2-conteudo{
+    color: var(--white);
+}
+
+.impacto-p2-conteudo-left > h3, .impacto-p2-conteudo > h3{
+    text-align: center;
+    font-size: 40;
+    text-transform: uppercase;
+}
+.impacto-p2-conteudo > p, ol{
+    padding: 5rem;}
+
+.impacto-p2 > div{
+    color: var(--white);
+}
+
+
+.impacto-p2-conteudo-left{
+    color: var(--white);
+}
+
+
+
+.impacto-p2-conteudo-left> p{
+    text-align: right;
+    padding: 5rem;
+}
+
+.background-DNA{
+    position: absolute;
+    width: 100%;
+    height: 800px;
+}
+.background-DNA > img{
+    width: 100%;
+    height: 100%;   
+    object-fit: cover;
 }
