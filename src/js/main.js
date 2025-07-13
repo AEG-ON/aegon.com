@@ -1,79 +1,80 @@
-const video = document.querySelector('.video-container video');
+// const video = document.querySelector('.video-container video');
 
-window.addEventListener('scroll', () => {
-  const section = document.querySelector('.hero-section');
-  const rect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+// window.addEventListener('scroll', () => {
+//   const section = document.querySelector('.hero-section');
+//   const rect = section.getBoundingClientRect();
+//   const windowHeight = window.innerHeight;
 
-  const visible = Math.min(Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0), 1);
-  const scale = 1 + visible * 1;  // Aumenta até 20%
+//   const visible = Math.min(Math.max((windowHeight - rect.top) / (windowHeight + rect.height), 0), 1);
+//   const scale = 1 + visible * 1;  // Aumenta até 20%
 
-  video.style.transform = `scale(${scale})`;
-});
-
-
+//   video.style.transform = `scale(${scale})`;
+// });
 
 
 
-const videoContainer = document.querySelector('.video-container');
-const heroSection = document.querySelector('.hero-section');
-const overlay = document.querySelector('.overlay');
 
-let locked = false;
-let isExpanded = false;
 
-function animateVideo(grow = true) {
-  document.body.style.overflow = 'hidden';
-  locked = true;
+// const videoContainer = document.querySelector('.video-container');
+// const heroSection = document.querySelector('.hero-section');
+// const overlay = document.querySelector('.overlay');
 
-  let size = grow ? 500 : 800;
-  const targetSize = grow ? 800 : 500;
-  const speed = 3; // Quanto maior, mais rápido
+// let locked = false;
+// let isExpanded = false;
 
-  overlay.style.opacity = grow ? '1' : '1';
+// function animateVideo(grow = true) {
+//   document.body.style.overflow = 'hidden';
+//   locked = true;
 
-  const animate = () => {
-    size += grow ? speed : -speed;
+//   let size = grow ? 500 : 800;
+//   const targetSize = grow ? 800 : 500;
+//   const speed = 3; // Quanto maior, mais rápido
 
-    if ((grow && size >= targetSize) || (!grow && size <= targetSize)) {
-      size = targetSize;
-      videoContainer.style.width = `${size}px`;
-      videoContainer.style.height = `${size}px`;
+//   overlay.style.opacity = grow ? '1' : '1';
 
-      overlay.style.opacity = grow ? '1' : '0';
+//   const animate = () => {
+//     size += grow ? speed : -speed;
 
-      document.body.style.overflow = 'auto';
-      locked = false;
-      isExpanded = grow;
-      return;
-    }
+//     if ((grow && size >= targetSize) || (!grow && size <= targetSize)) {
+//       size = targetSize;
+//       videoContainer.style.width = `${size}px`;
+//       videoContainer.style.height = `${size}px`;
 
-    videoContainer.style.width = `${size}px`;
-    videoContainer.style.height = `${size}px`;
+//       overlay.style.opacity = grow ? '1' : '0';
 
-    requestAnimationFrame(animate);
-  };
+//       document.body.style.overflow = 'auto';
+//       locked = false;
+//       isExpanded = grow;
+//       return;
+//     }
 
-  requestAnimationFrame(animate);
-}
+//     videoContainer.style.width = `${size}px`;
+//     videoContainer.style.height = `${size}px`;
 
-window.addEventListener('scroll', () => {
-  const rect = heroSection.getBoundingClientRect();
+//     requestAnimationFrame(animate);
+//   };
 
-  // Descer: cresce
-  if (!locked && !isExpanded && rect.top <= 0 && rect.bottom >= window.innerHeight) {
-    animateVideo(true);
-  }
+//   requestAnimationFrame(animate);
+// }
 
-  // Subir: volta a diminuir
-  if (!locked && isExpanded && rect.top >= 0) {
-    animateVideo(false);
-  }
-});
+// window.addEventListener('scroll', () => {
+//   const rect = heroSection.getBoundingClientRect();
+
+//   // Descer: cresce
+//   if (!locked && !isExpanded && rect.top <= 0 && rect.bottom >= window.innerHeight) {
+//     animateVideo(true);
+//   }
+
+//   // Subir: volta a diminuir
+//   if (!locked && isExpanded && rect.top >= 0) {
+//     animateVideo(false);
+//   }
+// });
 
 
 // site funcionamento
-        // Smooth scrolling for navigation links
+// Smooth scrolling for navigation links
+      // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -104,6 +105,62 @@ window.addEventListener('scroll', () => {
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
         });
+
+        // What We Do section animation
+        const whatWeDoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = entry.target.querySelectorAll('.service-card-item');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateX(0)';
+                        }, index * 150);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        const whatWeDoSection = document.querySelector('.service-cards-container');
+        if (whatWeDoSection) {
+            // Initially hide cards for animation
+            whatWeDoSection.querySelectorAll('.service-card-item').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = `translateX(${(index % 2 === 0 ? '-' : '')}50px)`;
+                card.style.transition = 'all 0.8s ease';
+            });
+            whatWeDoObserver.observe(whatWeDoSection);
+        }
+
+        // Carousel animation on scroll
+        const carouselObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const items = entry.target.querySelectorAll('.carousel-item');
+                    items.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        const carousel = document.querySelector('.image-carousel');
+        if (carousel) {
+            // Initially hide items for animation
+            carousel.querySelectorAll('.carousel-item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(30px)';
+                item.style.transition = 'all 0.6s ease';
+            });
+            carouselObserver.observe(carousel);
+        }
 
         // Timeline animation for about section
         const timelineObserver = new IntersectionObserver((entries) => {
@@ -239,12 +296,37 @@ window.addEventListener('scroll', () => {
         });
 
         // Newsletter subscription
-        document.querySelector('footer button').addEventListener('click', function() {
-            const email = this.previousElementSibling.value;
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            const btn = this.querySelector('.newsletter-btn');
+            const originalContent = btn.innerHTML;
+            
             if (email) {
-                alert('Obrigado por se inscrever em nossa newsletter!');
-                this.previousElementSibling.value = '';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                btn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('✅ Obrigado por se inscrever em nossa newsletter!\n\nVocê receberá conteúdos exclusivos sobre marketing digital e inovação.');
+                    this.querySelector('.newsletter-input').value = '';
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                }, 1500);
             }
+        });
+
+        // CTA Button click handler
+        document.querySelector('.footer-cta-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Scroll to contact section
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Optional: Show modal or trigger contact form
+            setTimeout(() => {
+                alert('📞 Vamos conversar sobre seu projeto!\n\nPreencha o formulário abaixo ou entre em contato diretamente via WhatsApp: (11) 98888-8888');
+            }, 1000);
         });
 
         // Add dynamic background animation to hero
@@ -411,4 +493,53 @@ window.addEventListener('scroll', () => {
         // Initialize carousel
         updateSlide();
         startAutoScroll();
-    
+
+        // Mid-page CTA functionality
+        document.querySelector('.mid-cta-primary').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Scroll to contact section with smooth animation
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Optional: Highlight the contact form
+            setTimeout(() => {
+                const contactForm = document.getElementById('contactForm');
+                contactForm.style.boxShadow = '0 0 30px rgba(0, 87, 255, 0.3)';
+                contactForm.style.transform = 'scale(1.02)';
+                contactForm.style.transition = 'all 0.5s ease';
+                
+                setTimeout(() => {
+                    contactForm.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.1)';
+                    contactForm.style.transform = 'scale(1)';
+                }, 2000);
+            }, 800);
+        });
+
+        document.querySelector('.mid-cta-secondary').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Scroll to portfolio section
+            document.getElementById('portfolio').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Mid-CTA section animation observer
+        const midCtaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Reset animations by removing and re-adding the section
+                    const section = entry.target;
+                    section.style.animation = 'none';
+                    section.offsetHeight; // Trigger reflow
+                    section.style.animation = null;
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        const midCtaSection = document.querySelector('.mid-cta-section');
+        if (midCtaSection) {
+            midCtaObserver.observe(midCtaSection);
+        }
