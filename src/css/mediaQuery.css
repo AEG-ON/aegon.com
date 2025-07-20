@@ -87,3 +87,435 @@
                 left: 30px;
             }
         }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .contact-form {
+        margin: 0 1rem;
+        padding: 2rem;
+    }
+
+    .portfolio-filters {
+        padding: 0 1rem;
+    }
+
+    .filter-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .what-we-do-title {
+        font-size: 2rem;
+    }
+
+    .what-we-do-subtitle {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .service-cards-container {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+
+    .service-card-item {
+        flex: none;
+        height: 250px;
+        min-width: auto;
+    }
+
+    .service-card-item:hover {
+        flex: none;
+    }
+
+    .service-card-item:not(:hover) {
+        flex: none;
+    }
+
+    .service-card-content h3 {
+        writing-mode: horizontal-tb;
+        text-orientation: initial;
+        position: static;
+        font-size: 1.5rem;
+    }
+
+    .service-card-content p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .service-card-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .carousel-title {
+        font-size: 2rem;
+    }
+
+    .image-carousel {
+        gap: 1rem;
+    }
+
+    .carousel-item {
+        width: 200px;
+        height: 140px;
+    }
+
+    .carousel-item:hover {
+        transform: scale(1.2) translateY(-10px);
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pricing-card {
+        padding: 2rem;
+    }
+
+    .pricing-title {
+        font-size: 2rem;
+    }
+
+    .testimonials-title {
+        font-size: 2rem;
+    }
+
+    .testimonials-container {
+        gap: 1rem;
+    }
+
+    .testimonial-card {
+        flex: 0 0 300px;
+        padding: 2rem;
+    }
+
+    .video-thumbnail {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .about-grid,
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .footer-awards {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-cta {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .mid-cta-title {
+        font-size: 2.2rem;
+    }
+
+    .mid-cta-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .mid-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .mid-cta-primary,
+    .mid-cta-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        padding: 1rem 2rem;
+    }
+
+    .mid-cta-stats {
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .mid-cta-stat-number {
+        font-size: 2rem;
+    }
+
+    .mid-cta-stat-label {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .contact-form {
+        margin: 0 1rem;
+        padding: 2rem;
+    }
+
+    .portfolio-filters {
+        padding: 0 1rem;
+    }
+
+    .filter-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .what-we-do-title {
+        font-size: 2rem;
+    }
+
+    .what-we-do-subtitle {
+        font-size: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .service-cards-container {
+        flex-direction: column;
+        height: auto;
+        gap: 1rem;
+    }
+
+    .service-card-item {
+        flex: none;
+        height: 250px;
+        min-width: auto;
+    }
+
+    .service-card-item:hover {
+        flex: none;
+    }
+
+    .service-card-item:not(:hover) {
+        flex: none;
+    }
+
+    .service-card-content h3 {
+        writing-mode: horizontal-tb;
+        text-orientation: initial;
+        position: static;
+        font-size: 1.5rem;
+    }
+
+    .service-card-content p {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .service-card-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .carousel-title {
+        font-size: 2rem;
+    }
+
+    .image-carousel {
+        gap: 1rem;
+    }
+
+    .carousel-item {
+        width: 200px;
+        height: 140px;
+    }
+
+    .carousel-item:hover {
+        transform: scale(1.2) translateY(-10px);
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .pricing-card {
+        padding: 2rem;
+    }
+
+    .pricing-title {
+        font-size: 2rem;
+    }
+
+    .testimonials-title {
+        font-size: 2rem;
+    }
+
+    .testimonials-container {
+        gap: 1rem;
+    }
+
+    .testimonial-card {
+        flex: 0 0 300px;
+        padding: 2rem;
+    }
+
+    .video-thumbnail {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .about-grid,
+    .services-grid,
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .footer-links {
+        justify-content: center;
+    }
+
+    .footer-awards {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-cta {
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .mid-cta-title {
+        font-size: 2.2rem;
+    }
+
+    .mid-cta-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .mid-cta-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .mid-cta-primary,
+    .mid-cta-secondary {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        padding: 1rem 2rem;
+    }
+
+    .mid-cta-stats {
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .mid-cta-stat-number {
+        font-size: 2rem;
+    }
+
+    .mid-cta-stat-label {
+        font-size: 0.9rem;
+    }
+}
