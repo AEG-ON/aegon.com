@@ -1,0 +1,42 @@
+# 🚀 Compilador de Contexto: Aegon Digital Transformation 2026
+## 📝 Visão Geral do Projeto
+Estamos construindo a Estratégia de Transformação Digital da Aegon para 2026 . O objetivo é transformar um site institucional simples em uma Single Page Application (SPA) de elite , focada em "Experiência Espacial", interatividade imersiva e storytelling cinematográfico (estilo Rockstar Games/GTA VI).
+
+## 🛠️ Stack Tecnológica
+- Framework : React Router v7 + Vite.
+- Estilização : Tailwind CSS + PostCSS (v4 integration via @tailwindcss/postcss ).
+- Motor 3D : Three.js (React Three Fiber + @react-three/drei).
+- Animações : GSAP (GreenSock) + ScrollTrigger + Framer Motion.
+- Estado Global : Zustand.
+- Ícones : Lucide-React.
+## 🏗️ Arquitetura da SPA
+O projeto foi refatorado de uma landing page de scroll para uma SPA real baseada em visualizações únicas , acionadas por clique no Header.
+
+- Transições : Gerenciadas por AnimatePresence do Framer Motion (Fade/Slide).
+- Navegação : Home, DNA, Serviços, Portfólio e Contato.
+- Scroll Interno : Seções longas possuem custom-scrollbar estilizada em azul Aegon.
+## 🎨 Componentes e Funcionalidades Implementadas
+### 1. Sistema de Canvas 3D (CanvasContainer.tsx)
+- SpatialBackground : Campo de 8000 partículas reativas ao mouse com movimento orbital.
+- VideoBackground : Vídeo do mundo ( large.mp4 ) integrado com mixagem de cores e opacidade dinâmica.
+- PortfolioGallery : Galeria 3D em semicírculo frontal com 4 mockups reais (Branding, Sistemas, Design, Consultoria). Possui MeshDistortMaterial para efeito de ondulação fluida em hover.
+- Suspense & Loader : Implementado para evitar telas brancas durante o carregamento dos assets 3D.
+### 2. Seções Estratégicas
+- Hero ( Hero.tsx ) : Tipografia cinética com animação de entrada controlada (subcomponente Word ). Efeito de Skew on Scroll e CTA magnético para o portfólio.
+- DNA ( DNA.tsx ) : Narrativa com parallax profundo e Interruptor Cromático (inverte o fundo para azul elétrico ao entrar).
+- Serviços ( Services.tsx ) : Cards com hover dinâmico que revelam imagens originais e efeito de zoom.
+- Contato ( Contact.tsx ) : Formulário agêntico sequencial com integração criativa da imagem bgAegonLetter no fundo.
+### 3. Interatividade Global
+- Header ( Header.tsx ) : Logo original restaurada atuando como botão de "Start" (troca tema, brilha e dá play no vídeo do mundo).
+- Custom Cursor ( CustomCursor.tsx ) : Cursor magnético que muda de forma e cor ao interagir com elementos.
+- Magnetic Hook ( useMagnetic.ts ) : Hook personalizado para feedback tátil em botões e logo.
+## 🔧 Correções Críticas Realizadas
+- PostCSS Fix : Migração para @tailwindcss/postcss para compatibilidade com as versões mais recentes.
+- Typography Clipping : Ajuste de overflow: visible , padding e line-height no Hero para evitar corte nas letras animadas.
+- Tag Mismatch : Correção de tags section vs div em Feedbacks.
+- SPA Logic : Desativação do scroll global em favor de h-screen overflow-hidden no Root para garantir a experiência de visualização única.
+## 🚀 Próximos Passos Sugeridos
+- Implementar transições de câmera cinematográficas ao trocar entre Portfólio e outras seções.
+- Adicionar trilha sonora espacial opcional acionada pela Logo.
+- Refinar os textos de case studies no portfólio 3D.
+Instrução para o novo chat : "Olá, acabei de colar o compilador de contexto do projeto Aegon 2026. Por favor, analise a arquitetura e os componentes descritos para continuarmos o desenvolvimento a partir deste ponto."
