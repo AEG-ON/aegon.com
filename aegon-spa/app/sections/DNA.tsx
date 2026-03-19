@@ -49,7 +49,7 @@ export function DNA() {
   }, [])
 
   return (
-    <section ref={containerRef} className="relative h-screen px-8 overflow-y-auto pt-32 pb-24 custom-scrollbar">
+    <section ref={containerRef} className="relative min-h-screen px-8 pt-32 pb-24">
       {/* Imagem de fundo estilo Rockstar */}
       <div className="absolute inset-0 -z-10 dna-bg-image opacity-20">
         <img 

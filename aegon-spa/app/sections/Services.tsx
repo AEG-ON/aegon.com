@@ -42,7 +42,7 @@ export function Services() {
   }, [])
 
   return (
-    <section ref={containerRef} className="h-screen px-8 bg-black/40 backdrop-blur-3xl relative z-10 overflow-y-auto pt-32 pb-24 custom-scrollbar">
+    <section ref={containerRef} className="min-h-screen px-8 bg-black/40 backdrop-blur-3xl relative z-10 pt-32 pb-24">
       <div className="max-w-7xl mx-auto">
         <div className="services-title space-y-8 max-w-4xl mb-32">
           <h2 className="text-sm font-black tracking-[0.5em] text-aegon-blue uppercase">NOSSAS SOLUÇÕES</h2>

@@ -37,7 +37,7 @@ export function Contact() {
   }
 
   return (
-    <section className="h-screen px-8 relative z-10 bg-black overflow-y-auto pt-32 pb-24 custom-scrollbar flex items-center">
+    <section className="min-h-screen px-8 relative z-10 bg-black pt-32 pb-24 flex items-center">
       {/* Background Letter Criativo */}
       <div className="absolute right-0 bottom-0 w-1/2 h-1/2 -z-10 opacity-10 pointer-events-none overflow-hidden">
         <img 

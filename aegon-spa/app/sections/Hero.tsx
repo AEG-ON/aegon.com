@@ -3,7 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useAppStore } from '../store'
 import { useMagnetic } from '../hooks/useMagnetic'
-import { Pause, Play, RotateCcw, Volume2, VolumeX } from 'lucide-react'
+import { Pause, Play, RotateCcw, Volume2, VolumeX, ArrowRight } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,6 +17,7 @@ export function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useMagnetic()
+  const manifestoRef = useMagnetic()
   const [isMuted, setIsMuted] = useState(true)
   const [isPlaying, setIsPlaying] = useState(true)
   const [progress, setProgress] = useState(0)
@@ -48,7 +49,7 @@ export function Hero() {
     )
 
     gsap.set(videoShellRef.current, {
-      yPercent: 140,
+      yPercent: 100, // Reduzido de 140 para 100 para aparecer mais cedo
       scale: 0.78,
       borderRadius: '2rem'
     })
@@ -74,9 +75,9 @@ export function Hero() {
       scrollTl
         .to(contentRef.current, {
           scale: 0.78,
-          opacity: 0.08,
+          opacity: 0,
           y: -130,
-          duration: 1
+          duration: 1.5 // Atrasando o desaparecimento do texto
         }, 0)
         .to(videoShellRef.current, {
           yPercent: 0,
@@ -84,7 +85,7 @@ export function Hero() {
           width: '100vw',
           height: '100vh',
           borderRadius: 0,
-          duration: 1
+          duration: 1 // Vídeo sobe mais rápido que o texto some
         }, 0)
         .to(videoGlowRef.current, {
           opacity: 0.7,
@@ -277,11 +278,13 @@ export function Hero() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
             <div className="space-y-8">
               <h2 className="text-sm font-bold tracking-[0.4em] text-aegon-blue uppercase">MANIFESTO</h2>
-              <p className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none">
-                NÃO CRIAMOS APENAS <br />
-                <span className="text-white/30">CÓDIGO.</span> <br />
-                CRIAMOS <span className="text-aegon-blue">LEGADO.</span>
-              </p>
+              <div ref={manifestoRef} className="interactive inline-block cursor-pointer">
+                <p className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none pointer-events-none">
+                  NÃO CRIAMOS APENAS <br />
+                  <span className="text-white/30">CÓDIGO.</span> <br />
+                  CRIAMOS <span className="text-aegon-blue">LEGADO.</span>
+                </p>
+              </div>
             </div>
             <div className="space-y-6 text-lg text-white/60 leading-relaxed font-light">
               <p>
@@ -304,6 +307,24 @@ export function Hero() {
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="pt-12 md:pt-24 pb-8 flex flex-col items-center text-center space-y-8 border-t border-white/5 w-full">
+            <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">
+              Pronto para o <span className="text-aegon-blue">futuro?</span>
+            </h3>
+            <p className="text-white/50 max-w-lg mx-auto font-light">
+              Não deixe sua ideia no papel. Vamos construir algo extraordinário juntos.
+            </p>
+            <button
+              onClick={() => setActiveSection('contact')}
+              className="group relative inline-flex items-center justify-center px-10 py-5 overflow-hidden border border-white/20 rounded-full hover:border-aegon-blue transition-all duration-300 interactive"
+            >
+              <span className="relative z-10 flex items-center gap-3 font-bold tracking-widest uppercase text-sm group-hover:text-white transition-colors duration-300">
+                Vamos Conversar <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-aegon-blue translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
+            </button>
           </div>
         </div>
       </section>

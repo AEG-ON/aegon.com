@@ -6,6 +6,8 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import { useEffect } from "react";
+import { useAppStore } from "./store";
 
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -26,19 +28,33 @@ export const links: Route.LinksFunction = () => [
 import { CanvasContainer } from "./canvas/CanvasContainer";
 import { CustomCursor } from "./components/CustomCursor";
 
+function ThemeManager() {
+  const theme = useAppStore((state) => state.theme);
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+  }, [theme]);
+  return null;
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-br">
-      <head>
+    <html lang="pt-br" className="dark" suppressHydrationWarning>
+      <head suppressHydrationWarning>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-black text-white font-sans selection:bg-aegon-blue selection:text-white cursor-none">
+      <body className="bg-transparent text-black dark:text-white font-sans selection:bg-aegon-blue selection:text-white cursor-none transition-colors duration-500" suppressHydrationWarning>
+        <ThemeManager />
         <CustomCursor />
         <CanvasContainer />
-        <div className="relative z-10">
+        <div className="relative z-10" suppressHydrationWarning>
           {children}
         </div>
         <ScrollRestoration />

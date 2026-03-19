@@ -1,37 +1,43 @@
 import { Canvas } from '@react-three/fiber'
-import { PerspectiveCamera, Environment, Float, Loader } from '@react-three/drei'
+import { PerspectiveCamera, Loader } from '@react-three/drei'
 import { SpatialBackground } from './SpatialBackground'
 import { VideoBackground } from './VideoBackground'
 import { PortfolioGallery } from './PortfolioGallery'
+import { CameraManager } from './CameraManager'
+import { SoundManager } from './SoundManager'
 import { useAppStore } from '../store'
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
+
+function ClientOnly({ children }: { children: React.ReactNode }) {
+  const [hasMounted, setHasMounted] = useState(false)
+  useEffect(() => setHasMounted(true), [])
+  return hasMounted ? children : null
+}
 
 export function CanvasContainer() {
   const { theme, activeSection } = useAppStore()
+  const canvasPointerClass = activeSection === 'portfolio' ? 'pointer-events-auto' : 'pointer-events-none'
   
   return (
-    <>
+    <ClientOnly>
       {activeSection !== 'home' && <VideoBackground />}
-      <div className="fixed inset-0 -z-10 pointer-events-none transition-colors duration-1000"
-           style={{ backgroundColor: theme === 'black' ? 'rgba(0,0,0,0.6)' : 'rgba(0,26,77,0.6)' }}>
+      <div className={`fixed inset-0 -z-10 ${canvasPointerClass} transition-colors duration-1000`}
+           style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)' }}>
         <Canvas gl={{ antialias: true, alpha: true }} dpr={[1, 2]}>
           <PerspectiveCamera makeDefault position={[0, 0, 10]} fov={75} />
+          <CameraManager />
+          <SoundManager />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1.5} color="#0057ff" />
           <pointLight position={[-10, -10, -10]} intensity={1} color="#0057ff" />
           
           <Suspense fallback={null}>
             {activeSection !== 'home' && <SpatialBackground />}
-            
-            {activeSection === 'portfolio' && (
-              <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-                <PortfolioGallery />
-              </Float>
-            )}
+            {activeSection === 'portfolio' && <PortfolioGallery />}
           </Suspense>
         </Canvas>
         <Loader />
       </div>
-    </>
+    </ClientOnly>
   )
 }

@@ -15,8 +15,8 @@ export function Portfolio() {
             <div className="flex flex-col gap-2">
               <span className="text-[10px] uppercase tracking-widest text-aegon-blue font-bold">Interação</span>
               <div className="flex gap-4">
-                <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 text-[10px] uppercase tracking-tighter">Arraste para Rotacionar</div>
-                <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 text-[10px] uppercase tracking-tighter">Role para Navegar</div>
+                <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 text-[10px] uppercase tracking-tighter">Passe o mouse para destacar</div>
+                <div className="px-4 py-2 bg-white/5 rounded-lg border border-white/10 text-[10px] uppercase tracking-tighter">Role para explorar</div>
               </div>
             </div>
           </div>
