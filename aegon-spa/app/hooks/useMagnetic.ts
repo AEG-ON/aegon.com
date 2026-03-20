@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
+import gsap from "gsap";
 
 export function useMagnetic() {
   const ref = useRef<any>(null)

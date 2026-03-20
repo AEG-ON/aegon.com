@@ -2,7 +2,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useAppStore } from '../store'
 import * as THREE from 'three'
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
+import gsap from "gsap";
 
 export function CameraManager() {
   const { activeSection } = useAppStore()

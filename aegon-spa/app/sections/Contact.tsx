@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { gsap } from 'gsap'
+import gsap from "gsap";
 import { Send, ArrowRight } from 'lucide-react'
 
 export function Contact() {

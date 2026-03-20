@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { gsap } from 'gsap'
+import gsap from "gsap";
 import { LayoutGrid, Palette, Code, Smartphone, BarChart, Users, ArrowRight } from 'lucide-react'
 
 export function Services() {
