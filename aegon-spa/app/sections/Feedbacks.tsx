@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react'
-import gsap from "gsap";
 import { Star, Quote } from 'lucide-react'
 
 export function Feedbacks() {
@@ -14,24 +13,27 @@ export function Feedbacks() {
   ]
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const items = gsap.utils.toArray('.feedback-item') as HTMLElement[]
-      
-      items.forEach((item, i) => {
-        gsap.fromTo(item,
-          { opacity: 0, scale: 0.8 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            delay: i * 0.1,
-            ease: 'elastic.out(1, 0.75)',
-          }
-        )
-      })
-    }, containerRef)
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      const ctx = gsap.context(() => {
+        const items = gsap.utils.toArray('.feedback-item') as HTMLElement[]
+        
+        items.forEach((item, i) => {
+          gsap.fromTo(item,
+            { opacity: 0, scale: 0.8 },
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 1,
+              delay: i * 0.1,
+              ease: 'elastic.out(1, 0.75)',
+            }
+          )
+        })
+      }, containerRef)
 
-    return () => ctx.revert()
+      return () => ctx.revert()
+    })();
   }, [])
 
   return (
