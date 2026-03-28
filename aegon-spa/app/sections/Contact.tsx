@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react'
-import gsap from "gsap";
 import { Send, ArrowRight } from 'lucide-react'
 
 export function Contact() {
@@ -19,10 +18,13 @@ export function Contact() {
   })
 
   useEffect(() => {
-    gsap.fromTo(formRef.current,
-      { opacity: 0, x: 20 },
-      { opacity: 1, x: 0, duration: 0.5 }
-    )
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      gsap.fromTo(formRef.current,
+        { opacity: 0, x: 20 },
+        { opacity: 1, x: 0, duration: 0.5 }
+      )
+    })();
   }, [step])
 
   const nextStep = () => {

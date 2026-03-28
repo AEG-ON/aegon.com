@@ -1,13 +1,15 @@
 import type { Route } from "./+types/home";
 import { Header } from "../components/Header";
-import { Hero } from "../sections/Hero";
-import { DNA } from "../sections/DNA";
-import { Services } from "../sections/Services";
-import { Portfolio } from "../sections/Portfolio";
-import { Contact } from "../sections/Contact";
-import { Feedbacks } from "../sections/Feedbacks";
 import { useAppStore } from "../store";
 import { motion, AnimatePresence } from "framer-motion";
+import React, { Suspense } from "react";
+
+const Hero = React.lazy(() => import("../sections/Hero").then(module => ({ default: module.Hero })));
+const DNA = React.lazy(() => import("../sections/DNA").then(module => ({ default: module.DNA })));
+const Services = React.lazy(() => import("../sections/Services").then(module => ({ default: module.Services })));
+const Portfolio = React.lazy(() => import("../sections/Portfolio").then(module => ({ default: module.Portfolio })));
+const Contact = React.lazy(() => import("../sections/Contact").then(module => ({ default: module.Contact })));
+const Feedbacks = React.lazy(() => import("../sections/Feedbacks").then(module => ({ default: module.Feedbacks })));
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -43,10 +45,12 @@ export default function Home() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="h-full"
         >
-          {renderSection()}
+          <Suspense fallback={<div>Loading...</div>}>
+            {renderSection()}
+          </Suspense>
           
           {/* Opcional: Renderizar feedbacks apenas em certas seções ou como parte delas */}
-          {activeSection === 'services' && <Feedbacks />}
+          {activeSection === 'services' && <Suspense fallback={<div>Loading...</div>}><Feedbacks /></Suspense>}
         </motion.div>
       </AnimatePresence>
       

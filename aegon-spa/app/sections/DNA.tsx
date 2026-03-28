@@ -1,8 +1,4 @@
 import { useEffect, useRef } from 'react'
-import gsap from "gsap";
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function DNA() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -15,37 +11,43 @@ export function DNA() {
   ]
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animação de entrada estilo Rockstar
-      gsap.from('.dna-bg-image', {
-        scale: 1.5,
-        opacity: 0,
-        duration: 2,
-        ease: 'power2.out'
-      })
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger)
 
-      const sections = gsap.utils.toArray('.dna-section') as HTMLElement[]
-      sections.forEach((section, i) => {
-        gsap.fromTo(section,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.2 + i * 0.1,
-            ease: 'power4.out',
-          }
-        )
-      })
+      const ctx = gsap.context(() => {
+        // Animação de entrada estilo Rockstar
+        gsap.from('.dna-bg-image', {
+          scale: 1.5,
+          opacity: 0,
+          duration: 2,
+          ease: 'power2.out'
+        })
 
-      // Inverter cor de fundo imediatamente na seção DNA
-      gsap.to('body', { backgroundColor: '#0057ff', duration: 1 })
-    }, containerRef)
+        const sections = gsap.utils.toArray('.dna-section') as HTMLElement[]
+        sections.forEach((section, i) => {
+          gsap.fromTo(section,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 1,
+              delay: 0.2 + i * 0.1,
+              ease: 'power4.out',
+            }
+          )
+        })
 
-    return () => {
-      ctx.revert()
-      gsap.to('body', { backgroundColor: '#000000', duration: 1 })
-    }
+        // Inverter cor de fundo imediatamente na seção DNA
+        gsap.to('body', { backgroundColor: '#0057ff', duration: 1 })
+      }, containerRef)
+
+      return () => {
+        ctx.revert()
+        gsap.to('body', { backgroundColor: '#000000', duration: 1 })
+      }
+    })();
   }, [])
 
   return (

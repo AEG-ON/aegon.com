@@ -1,11 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import gsap from "gsap";
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { useAppStore } from '../store'
 import { useMagnetic } from '../hooks/useMagnetic'
 import { Pause, Play, RotateCcw, Volume2, VolumeX, ArrowRight } from 'lucide-react'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
   const { setActiveSection, setIsVideoPlaying } = useAppStore()
@@ -23,86 +19,92 @@ export function Hero() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    setIsVideoPlaying(false)
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const scroller = containerRef.current?.closest('main') as HTMLElement | null
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    const words = titleRef.current?.querySelectorAll('.word-inner')
-    if (words) {
-      tl.to(words, {
-        y: 0,
-        stagger: 0.05,
-        duration: reduceMotion ? 0.4 : 1.1,
-        delay: 0.25
-      })
-    }
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
+      gsap.registerPlugin(ScrollTrigger)
 
-    tl.fromTo(subtitleRef.current,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: reduceMotion ? 0.35 : 0.85 },
-      '-=0.8'
-    )
-    .fromTo(ctaRef.current,
-      { opacity: 0, scale: 0.8 },
-      { opacity: 1, scale: 1, duration: reduceMotion ? 0.35 : 0.75 },
-      '-=0.5'
-    )
+      setIsVideoPlaying(false)
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const scroller = containerRef.current?.closest('main') as HTMLElement | null
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
+      const words = titleRef.current?.querySelectorAll('.word-inner')
+      if (words) {
+        tl.to(words, {
+          y: 0,
+          stagger: 0.05,
+          duration: reduceMotion ? 0.4 : 1.1,
+          delay: 0.25
+        })
+      }
 
-    gsap.set(videoShellRef.current, {
-      yPercent: 100, // Reduzido de 140 para 100 para aparecer mais cedo
-      scale: 0.78,
-      borderRadius: '2rem'
-    })
+      tl.fromTo(subtitleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: reduceMotion ? 0.35 : 0.85 },
+        '-=0.8'
+      )
+      .fromTo(ctaRef.current,
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: reduceMotion ? 0.35 : 0.75 },
+        '-=0.5'
+      )
 
-    gsap.set(videoGlowRef.current, {
-      opacity: 0.35,
-      scale: 0.85
-    })
-
-    if (!reduceMotion) {
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          scroller: '#scroll-container', // Vincula explicitamente ao container principal
-          start: 'top top',
-          end: '+=145%',
-          scrub: 1,
-          pin: true,
-          // anticipatePin: 1 // Removido para evitar saltos visuais
-        }
+      gsap.set(videoShellRef.current, {
+        yPercent: 100, // Reduzido de 140 para 100 para aparecer mais cedo
+        scale: 0.78,
+        borderRadius: '2rem'
       })
 
-      scrollTl
-        .to(contentRef.current, {
-          scale: 0.78,
-          opacity: 0,
-          y: -130,
-          duration: 1.5 // Atrasando o desaparecimento do texto
-        }, 0)
-        .to(videoShellRef.current, {
-          yPercent: 0,
-          scale: 1,
-          width: '100vw',
-          height: '100vh',
-          borderRadius: 0,
-          duration: 1 // Vídeo sobe mais rápido que o texto some
-        }, 0)
-        .to(videoGlowRef.current, {
-          opacity: 0.7,
-          scale: 1.15,
-          duration: 1
-        }, 0)
-    }
-
-    ScrollTrigger.refresh()
-    return () => {
-      tl.kill()
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (trigger.trigger === containerRef.current) {
-          trigger.kill()
-        }
+      gsap.set(videoGlowRef.current, {
+        opacity: 0.35,
+        scale: 0.85
       })
-    }
+
+      if (!reduceMotion) {
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            scroller: '#scroll-container', // Vincula explicitamente ao container principal
+            start: 'top top',
+            end: '+=145%',
+            scrub: 1,
+            pin: true,
+            // anticipatePin: 1 // Removido para evitar saltos visuais
+          }
+        })
+
+        scrollTl
+          .to(contentRef.current, {
+            scale: 0.78,
+            opacity: 0,
+            y: -130,
+            duration: 1.5 // Atrasando o desaparecimento do texto
+          }, 0)
+          .to(videoShellRef.current, {
+            yPercent: 0,
+            scale: 1,
+            width: '100vw',
+            height: '100vh',
+            borderRadius: 0,
+            duration: 1 // Vídeo sobe mais rápido que o texto some
+          }, 0)
+          .to(videoGlowRef.current, {
+            opacity: 0.7,
+            scale: 1.15,
+            duration: 1
+          }, 0)
+      }
+
+      ScrollTrigger.refresh()
+      return () => {
+        tl.kill()
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.trigger === containerRef.current) {
+            trigger.kill()
+          }
+        })
+      }
+    })();
   }, [])
 
   const togglePlay = async () => {

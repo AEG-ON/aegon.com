@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react'
-import gsap from "gsap";
 import { LayoutGrid, Palette, Code, Smartphone, BarChart, Users, ArrowRight } from 'lucide-react'
 
 export function Services() {
@@ -15,30 +14,33 @@ export function Services() {
   ]
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from('.services-title', {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: 'power3.out'
-      })
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      const ctx = gsap.context(() => {
+        gsap.from('.services-title', {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: 'power3.out'
+        })
 
-      const cards = gsap.utils.toArray('.service-card') as HTMLElement[]
-      cards.forEach((card, i) => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: 0.2 + i * 0.1,
-            ease: 'power3.out',
-          }
-        )
-      })
-    }, containerRef)
+        const cards = gsap.utils.toArray('.service-card') as HTMLElement[]
+        cards.forEach((card, i) => {
+          gsap.fromTo(card,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              delay: 0.2 + i * 0.1,
+              ease: 'power3.out',
+            }
+          )
+        })
+      }, containerRef)
 
-    return () => ctx.revert()
+      return () => ctx.revert()
+    })();
   }, [])
 
   return (

@@ -2,7 +2,6 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useAppStore } from '../store'
 import * as THREE from 'three'
 import { useEffect, useRef } from 'react'
-import gsap from "gsap";
 
 export function CameraManager() {
   const { activeSection } = useAppStore()
@@ -11,36 +10,39 @@ export function CameraManager() {
   const targetRotation = useRef(new THREE.Euler(0, 0, 0))
 
   useEffect(() => {
-    // Definição de "Waypoints" cinematográficos
-    switch (activeSection) {
-      case 'home':
-        // Heroic shot: Frontal, levemente baixo
-        targetPosition.current.set(0, 0, 10)
-        targetRotation.current.set(0, 0, 0)
-        break
-      case 'dna':
-        // Abstract shot: Lateral, focado no background
-        targetPosition.current.set(5, 2, 8)
-        targetRotation.current.set(0, 0.5, 0)
-        break
-      case 'services':
-        // Overview shot: Mais distante, visão geral
-        targetPosition.current.set(-5, -2, 12)
-        targetRotation.current.set(0, -0.4, 0)
-        break
-      case 'portfolio':
-        targetPosition.current.set(0, 0.1, 8.5)
-        targetRotation.current.set(0, 0, 0)
-        break
-      case 'contact':
-        // Close shot: Focado e íntimo
-        targetPosition.current.set(0, 0, 8)
-        targetRotation.current.set(0, 0, 0)
-        break
-      default:
-        targetPosition.current.set(0, 0, 10)
-        targetRotation.current.set(0, 0, 0)
-    }
+    (async () => {
+      const gsap = (await import('gsap')).default;
+      // Definição de "Waypoints" cinematográficos
+      switch (activeSection) {
+        case 'home':
+          // Heroic shot: Frontal, levemente baixo
+          targetPosition.current.set(0, 0, 10)
+          targetRotation.current.set(0, 0, 0)
+          break
+        case 'dna':
+          // Abstract shot: Lateral, focado no background
+          targetPosition.current.set(5, 2, 8)
+          targetRotation.current.set(0, 0.5, 0)
+          break
+        case 'services':
+          // Overview shot: Mais distante, visão geral
+          targetPosition.current.set(-5, -2, 12)
+          targetRotation.current.set(0, -0.4, 0)
+          break
+        case 'portfolio':
+          targetPosition.current.set(0, 0.1, 8.5)
+          targetRotation.current.set(0, 0, 0)
+          break
+        case 'contact':
+          // Close shot: Focado e íntimo
+          targetPosition.current.set(0, 0, 8)
+          targetRotation.current.set(0, 0, 0)
+          break
+        default:
+          targetPosition.current.set(0, 0, 10)
+          targetRotation.current.set(0, 0, 0)
+      }
+    })();
   }, [activeSection])
 
   useFrame((state, delta) => {
