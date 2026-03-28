@@ -4,6 +4,6 @@
 
 # React Router
 /.react-router/
-/build/
+build
 /dist/
 /.next/
