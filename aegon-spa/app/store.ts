@@ -10,6 +10,12 @@ interface AppState {
   setIsVideoPlaying: (playing: boolean) => void;
   isSoundEnabled: boolean;
   toggleSound: () => void;
+  isPortfolioInteractive: boolean;
+  setPortfolioInteractive: (interactive: boolean) => void;
+  focusPlanet: string | null;
+  setFocusPlanet: (planetId: string | null) => void;
+  currentProjectIndex: number;
+  setCurrentProjectIndex: (index: number) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -22,4 +28,10 @@ export const useAppStore = create<AppState>((set) => ({
   setIsVideoPlaying: (playing) => set({ isVideoPlaying: playing }),
   isSoundEnabled: false,
   toggleSound: () => set((state) => ({ isSoundEnabled: !state.isSoundEnabled })),
+  isPortfolioInteractive: false,
+  setPortfolioInteractive: (interactive) => set({ isPortfolioInteractive: interactive }),
+  focusPlanet: null,
+  setFocusPlanet: (planetId) => set({ focusPlanet: planetId }),
+  currentProjectIndex: 0,
+  setCurrentProjectIndex: (index) => set({ currentProjectIndex: index }),
 }));

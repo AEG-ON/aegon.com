@@ -40,15 +40,6 @@ export function Contact() {
 
   return (
     <section className="min-h-screen px-8 relative z-10 bg-black pt-32 pb-24 flex items-center">
-      {/* Background Letter Criativo */}
-      <div className="absolute right-0 bottom-0 w-1/2 h-1/2 -z-10 opacity-10 pointer-events-none overflow-hidden">
-        <img 
-          src="/assets/img/bgAegonLetter.png" 
-          alt="Aegon Background" 
-          className="w-full h-full object-contain object-right-bottom scale-150 translate-x-1/4 translate-y-1/4 rotate-12"
-        />
-      </div>
-
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
         <div className="space-y-8">
           <h2 className="text-sm font-bold tracking-[0.4em] text-aegon-blue uppercase">CONTATO</h2>

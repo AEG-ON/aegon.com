@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react'
 
 export function DNA() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const imageRef = useRef<HTMLDivElement>(null)
   
   const milestones = [
     { title: 'NOSSA MISSÃO', text: 'Democratizar o acesso a soluções digitais de qualidade, ajudando empresas de todos os tamanhos a alcançar seus objetivos através da inovação tecnológica.' },
@@ -11,20 +10,12 @@ export function DNA() {
   ]
 
   useEffect(() => {
+    let cleanup = () => {}
+
     (async () => {
-      const gsap = (await import('gsap')).default;
-      const { ScrollTrigger } = await import('gsap/dist/ScrollTrigger');
-      gsap.registerPlugin(ScrollTrigger)
+      const gsap = (await import('gsap')).default
 
       const ctx = gsap.context(() => {
-        // Animação de entrada estilo Rockstar
-        gsap.from('.dna-bg-image', {
-          scale: 1.5,
-          opacity: 0,
-          duration: 2,
-          ease: 'power2.out'
-        })
-
         const sections = gsap.utils.toArray('.dna-section') as HTMLElement[]
         sections.forEach((section, i) => {
           gsap.fromTo(section,
@@ -38,29 +29,18 @@ export function DNA() {
             }
           )
         })
-
-        // Inverter cor de fundo imediatamente na seção DNA
-        gsap.to('body', { backgroundColor: '#0057ff', duration: 1 })
       }, containerRef)
 
-      return () => {
+      cleanup = () => {
         ctx.revert()
-        gsap.to('body', { backgroundColor: '#000000', duration: 1 })
       }
-    })();
+    })()
+
+    return () => cleanup()
   }, [])
 
   return (
-    <section ref={containerRef} className="relative min-h-screen px-8 pt-32 pb-24">
-      {/* Imagem de fundo estilo Rockstar */}
-      <div className="absolute inset-0 -z-10 dna-bg-image opacity-20">
-        <img 
-          src="/assets/img/bgAegonLetter.png" 
-          alt="DNA Background" 
-          className="w-full h-full object-cover scale-110"
-        />
-      </div>
-
+    <section ref={containerRef} className="relative min-h-screen px-8 pt-32 pb-24 bg-black">
       <div className="max-w-6xl mx-auto space-y-48 relative z-10">
         <div className="dna-section space-y-6 max-w-3xl">
           <h2 className="text-sm font-black tracking-[0.5em] text-aegon-blue uppercase">DNA & CULTURA</h2>
